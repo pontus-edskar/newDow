@@ -1,0 +1,40 @@
+@model MovieRate.Models.RateMovie
+
+@{
+    ViewData["Title"] = "Edit Movie";
+}
+
+<div class="text-center">
+        <h1 class="display-4">Edit Movie Ratings</h1>
+</div>
+
+<form action="SubmitEdit" method="post">
+        <div class="form-group">
+                <label for="Title">Title</label>
+                <input type="text" class="form-control" readonly asp-for="Title">
+        </div>
+        <div class="form-group mt-4">
+                <label for="Genre">Genre</label>
+                <input type="text" class="form-control" readonly asp-for="Genre">
+        </div>
+        <div class="form-group mt-4">
+                <label for="RatingSlider">Rating</label>
+                <input type="range" class="form-control" min="1" max="10" step="0.1" asp-for="Rate" id="RatingSlider" oninput="this.nextElementSibling.value = this.value">
+                <span id="RatingValue" style="font-size: 20px;">@Model.Rate</span>
+        </div>
+        <button class="btn btn-primary mt-4" type="submit">Save Changes</button>
+</form>
+
+<!--- Script to link the ratingvalue to the slider--->
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            const slider = document.getElementById("RatingSlider");
+            const RatingValue = document.getElementById("RatingValue");
+
+            slider.oninput = function()
+            {
+                RatingValue.textContent = this.value;
+            }
+        </script>
+    }

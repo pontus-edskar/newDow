@@ -1,0 +1,40 @@
+@model List<MovieRate.Models.RateMovie>
+
+@{
+    ViewData["Title"] = "Movie Rates";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Movie Rates</h1>
+</div>
+
+@if (Model.Count == 0)
+{
+    <p>No movie ratings submitted yet.</p>
+}
+else
+{
+         <p><strong>Total Reviews (from Cookie):</strong> @ViewBag.RatingsCount</p>
+        <table class="table table-striped">
+                <thead>
+                        <tr>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Rating</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        @foreach (var movie in Model)
+                        {
+                                <tr>
+                                        <td>@movie.Title</td>
+                                        <td>@movie.Genre</td>
+                                        <td>@movie.Rate</td>
+                                        <td>
+                                                <a asp-action="EditMovie" asp-route-title="@movie.Title" class="btn btn-secondary">Edit</a>
+                                        </td>
+                                </tr>
+                        }
+                </tbody>
+        </table>
+}

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .background {
+        background-image: url('/css/BG_DOW.png');
+        background-size: cover;
+        height: 100vh;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
+
+<div class="background">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>This is a Webbsite where you can Rate any Movie you have seen!</p>
+        <a asp-action="MovieRates" class="btn btn-primary">Movie Rates</a>
+        <a asp-action="RateAMovie" class="btn btn-secondary">Rate a Movie</a>
+    </div>
+</div>

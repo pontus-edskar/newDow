@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Rate Movie";
+}
+
+@model MovieRate.Models.RateMovie
+
+<div class="text-center">
+    <h1 class="display-4">Rate a Movie</h1>
+</div>
+
+<form asp-action="SubmitRating" asp-controller="Home" method="post">
+    <label for="Title">Title</label>
+    <input class="form-control" type="text" placeholder="Title of movie" asp-for="Title">
+    <label for="Genre" class="mt-4">Genre</label>
+    @Html.DropDownList("Genre", (SelectList)ViewBag.Genres, "Select Genre", new {@class = "form-control"})
+    <label for="RatingSlider" class="mt-4">Rating</label>
+    <input class="form-control" type="range" min="1" max="10" step="0.1" value="1" asp-for="Rate" oninput="this.nextElementSibling.value = this.value" id="RatingSlider">
+    <span id="RatingValue" style="font-size: 20px;">1.0</span>
+    <div>
+        <button class="btn btn-primary mt-4" type="submit">Submit</button>
+    </div>
+    
+
+    <!--- Script to link the ratingvalue to the slider--->
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            const slider = document.getElementById("RatingSlider");
+            const RatingValue = document.getElementById("RatingValue");
+
+            slider.oninput = function()
+            {
+                RatingValue.textContent = this.value;
+            }
+        </script>
+    }
+</form>
